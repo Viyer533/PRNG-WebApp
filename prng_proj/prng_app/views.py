@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import os
+from prng_ecga import PRNS_GENERATOR
 # Create your views here.
 def home_view(request):
+    print(PRNS_GENERATOR.generate())
     return render(request, 'index.html')
 
 
@@ -26,7 +28,7 @@ def process_form(request):
         number2 = request.POST.get('number2')
         number3 = request.POST.get('number3')
         number4 = request.POST.get('number4')
-
+        
 
         # Process the form data (e.g., save the image, perform calculations with numbers, etc.)
         
