@@ -1,0 +1,6 @@
+*.tiff
+*.png
+__pycache__/
+.venv/
+*.npy
+*.pyc
