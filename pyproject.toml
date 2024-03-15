@@ -15,6 +15,7 @@ sympy = "^1.12"
 bitstring = "^4.1.4"
 nistrng = "^1.2.3"
 django = "^5.0.3"
+prng_ecga = {path = "/home/ronithrnair/NITK/Sem6/IAS/Project/PRNG-using-ECGA"}
 
 [build-system]
 requires = ["poetry-core"]

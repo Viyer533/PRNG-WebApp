@@ -355,6 +355,27 @@ typing = ["typing-extensions"]
 xmp = ["defusedxml"]
 
 [[package]]
+name = "prng-ecga"
+version = "0.1.0"
+description = "A novel pseudo-random number generator based on multivariable optimization for image-cryptographic applications"
+optional = false
+python-versions = ">=3.10,<3.13"
+files = []
+develop = false
+
+[package.dependencies]
+bitstring = "^4.1.4"
+mod = "^0.3.0"
+nistrng = "^1.2.3"
+numpy = ">=1.26.1"
+pillow = ">=10.0.0,<=10.2.0"
+sympy = "^1.12"
+
+[package.source]
+type = "directory"
+url = "../PRNG-using-ECGA"
+
+[[package]]
 name = "scipy"
 version = "1.12.0"
 description = "Fundamental algorithms for scientific computing in Python"
@@ -451,4 +472,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "e5273af47ef0ac54bff2a58d9c1035f395ed3702c4458cd0a633cdc4ceef6d10"
+content-hash = "b747d2f32ae42d82e6a3e397a0a1113972060e4ab9746134938b8c42dd43dec3"

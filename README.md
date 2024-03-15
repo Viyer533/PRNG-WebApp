@@ -13,6 +13,10 @@ With knowledge of the seed value and the algorithm used, one can reproduce the s
 
 2. Add the location of the above package to `pyproject.toml` under `tool.poetry.dependencies`
 
+    ```bash
+    prng_ecga = { path = "/path/to/parent/directory/of/package" }
+    ```
+
 3. Use `poetry` to install dependencies:
 
 ```bash
