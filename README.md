@@ -22,7 +22,7 @@ With knowledge of the seed value and the algorithm used, one can reproduce the s
     ```bash
     poetry install
     ```
-4. Create directory `\folder` within `\prng_proj` 
+4. Create directory `\assets` within `\prng_proj` 
 
 ## Run
 
