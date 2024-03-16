@@ -19,7 +19,4 @@ from django.urls import path, include
 from prng_app import views
 
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('prng_app.urls'))
-]
+urlpatterns = [path("admin/", admin.site.urls), path("", include("prng_app.urls"))]
