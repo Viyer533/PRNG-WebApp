@@ -19,14 +19,15 @@ With knowledge of the seed value and the algorithm used, one can reproduce the s
 
 3. Use `poetry` to install dependencies:
 
-```bash
-poetry install
-```
+    ```bash
+    poetry install
+    ```
+4. Create directory `\folder` within `\prng_proj` 
 
 ## Run
 
-Execute the following command to run the Jupyter notebook:
+1. Execute the following command to run the Web Server:
 
-```bash
-poetry run python manage.py runserver
-```
+    ```bash
+    poetry run python manage.py runserver
+    ```
