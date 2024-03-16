@@ -48,17 +48,16 @@
     <div class="container">
         <h1>Upload Image and Input Numbers</h1>
         <form id="uploadForm" enctype="multipart/form-data" method="POST">
-            <!-- {% csrf_token %} Add the CSRF token inside the form -->
+            {% csrf_token %}
             <div class="form-group">
               <label for="imageUpload"><b>Choose an image file:</b></label>
               <input type="file" class="form-control-file" id="imageUpload" name="imageUpload" style="font-size: 20px;">
             </div>
-            <button type="submit" class="btn btn-primary" style="border-color: cyan; border-width: 2px;">CONVERT</button>
             <input type="number" name="number1" placeholder="Enter number 1" required><br>
             <input type="number" name="number2" placeholder="Enter number 2" required><br>
             <input type="number" name="number3" placeholder="Enter number 3" required><br>
             <input type="number" name="number4" placeholder="Enter number 4" required><br>
-            <input type="submit" value="Submit">
+            <button type="submit" class="btn btn-primary" style="border-color: cyan; border-width: 2px;">CONVERT</button>
         </form>
     </div>
 </body>
