@@ -7,26 +7,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Upload and Number Input</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 1.2em;
+            display: block;
+        }
+        input[type="file"] {
+            font-size: 1.2em;
+            background-color: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        input[type="number"] {
+            font-size: 1.2em;
+            background-color: transparent;
+            border: 2px solid #fff;
+            color: #000000;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 200px;
+        }
+        button[type="submit"] {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 2px solid cyan;
+            color: cyan;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        button[type="submit"]:hover {
+            background-color: cyan;
+            color: #fff;
+        }
+        #imagePreview {
+            margin-top: 20px;
+            max-width: 100%;
+            display: none;
+        }
+
+        body {
+            background: #ffe4c4;
+        }
+
+        /* pre {
+        position: relative;
+        background: #d3d6db;
+        padding: 10px;
+        font-size: 15px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        border: 1px solid #e6e7e9;
+        max-width: 500px;
+        } */
+
+        .copy-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        /* .copy-button:hover {
+        color: #000;
+        } */
+
+        pre {
+            white-space: nowrap;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-container {
+            margin-top : 50px;
+            position: relative;
+            background-color: #615a5a;
+            border: 1px solid #000000;
+            padding: 10px;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="{% static 'js/index.js' %}"></script>
 </head>
 <body>  
-    <div id="particles-js">
-    </div> 
+    <div id="particles-js"></div> 
     <div class="container">
+        
         <h1>Upload Image and Input Numbers</h1>
         <form id="uploadForm" enctype="multipart/form-data" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <label for="imageUpload"><b>Choose an image file:</b></label>
-                <input type="file" class="form-control-file" id="imageUpload" name="imageUpload" style="font-size: 20px;">
+                <input type="file" id="imageUpload" name="imageUpload" onchange="previewImage(event)">
             </div>
-            <input type="number" name="number1" placeholder="Enter number 1" required><br>
-            <input type="number" name="number2" placeholder="Enter number 2" required><br>
-            <input type="number" name="number3" placeholder="Enter number 3" required><br>
-            <input type="number" name="number4" placeholder="Enter number 4" required><br>
-            <button type="submit" class="btn btn-primary" style="border-color: cyan; border-width: 2px;">CONVERT</button>
+            <div id="imagePreview"></div>
+            <input type="number" name="number1" placeholder="Enter sequence length" required><br>
+            <input type="number" name="number2" placeholder="Enter m value" required><br>
+            <!-- <input type="number" name="number3" placeholder="Enter number 3" required><br>
+            <input type="number" name="number4" placeholder="Enter number 4" required><br> -->
+            <button type="submit">CONVERT</button>
         </form>
+        <div class="code-container">
+            <pre id="myPreTag">
+                {% for number in result %}
+                    {{ number }}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            </pre>    
+            <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
+        </div>
+        
+        <script>
+            function copyToClipboard() {
+                var seq = document.getElementById('myPreTag').innerText;
+                var buttonText = document.querySelector('.copy-btn');
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(seq).then(() => {
+                        buttonText.innerText = 'Copied!';
+                        setTimeout(() => {
+                            buttonText.innerText = 'Copy';
+                        }, 2000);
+                    }).catch(err => {
+                    console.error('Error copying text to clipboard: ', err);
+                    });
+                } else {
+                    var textarea = document.createElement('textarea');
+                    textarea.value = seq;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        var successful = document.execCommand('copy');
+                        if (successful) {
+                            buttonText.innerText = 'Copied!';
+
+                            setTimeout(() => {
+                                buttonText.innerText = 'Copy';
+                            }, 2000);
+                        } 
+                        else {
+                            console.log('Fallback: Copying text command was unsuccessful');
+                        }
+                    }
+                    catch (err) {
+                        console.error('Fallback: Oops, unable to copy', err);
+                    }
+                document.body.removeChild(textarea);
+                }
+            }
+        </script>
     </div>
+
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('imagePreview');
+                output.style.display = 'block';
+                if (reader.result) {
+                    output.innerHTML = '<img src="' + reader.result + '" style="max-width:100%;"/>';
+                } else {
+                    console.error('Failed to read the file.');
+                }
+            };
+            reader.onerror = function() {
+                console.error('Error occurred while reading the file.');
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+    </script>
 </body>
 </html>

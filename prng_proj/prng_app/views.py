@@ -22,13 +22,12 @@ class HomePage(View):
                 for chunk in image_file.chunks():
                     destination.write(chunk)
 
-            number1 = request.POST.get("number1")
-            number2 = request.POST.get("number2")
-            number3 = request.POST.get("number3")
-            number4 = request.POST.get("number4")
+            number1 = int(request.POST.get("number1"))
+            number2 = int(request.POST.get("number2"))
 
-            print(PRNS_GENERATOR.generate({"img": image_path}))
+            result = PRNS_GENERATOR.generate({"img": image_path, "n": number1, "m": number2})[:number1] 
+            print(result)
 
-            return HttpResponse("Form submitted successfully.")
+            return render(request, "index.html", {"result": result})
         else:
             return render(request, "index.html")
