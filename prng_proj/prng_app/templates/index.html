@@ -17,13 +17,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: linear-gradient(to right, #ff6f61 0%, #ff904e 100%);
+    background-image: linear-gradient(to right, #00b9fd 0%, #0077ff 100%);
 }
 
 .container {
     position: relative;
     width: 80%;
-    max-width: 90%;
+    max-width: 50%;
     padding: 40px;
     text-align: center;
     color: #ffffff;
@@ -131,8 +131,8 @@ pre {
 }
 
 .banner {
-    background-color: #ff6f61;
-    color: #fff;
+    background-color: #ffffff;
+    color: #000000;
     padding: 30px;
     border-radius: 10px;
     margin-bottom: 30px;
@@ -147,6 +147,7 @@ pre {
 .banner p {
     font-weight: bold;
     margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .banner ul {
@@ -206,9 +207,9 @@ pre {
             </div>
             
         </form>
-        {% if result|length > 0 and image %}
+        {% if result|length > 0%}
         <div class="code-container" id = "codeContainer">
-            <h3 style = "font-family: 'Montserrat', 'sans-serif';">Generated Sequence:</h2>
+            <h3 style = "font-family: 'Montserrat', 'sans-serif';">Generated {{num_digits}}-digit number Sequence:</h2>
             <!-- <h4  style = "font-family: 'Montserrat', 'sans-serif';">Sequence Length: {{seqLen}} <br> Range of each number: {{0}} - {{mVal}}</h4> -->
             <pre id="myPreTag">
                 {% for number in result %}
@@ -287,7 +288,7 @@ pre {
         function validateForm() {
                 var sequenceLength = document.getElementById('sequenceLength').value;
                 var mValue = document.getElementById('mValue').value;
-                if (sequenceLength <= 0 || mValue <= 7) {
+                if (sequenceLength <= 0 || mValue <= 2) {
                     alert('Please enter acceptable values for both sequence length and m value.');
                     return false;
                 }

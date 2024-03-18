@@ -30,6 +30,6 @@ class HomePage(View):
             result = PRNS_GENERATOR.generate({"img": image_path, "n": number1, "m": number2})[:number1] 
             result = PRNS_GENERATOR.optimize(result)
             padded_result = ['0' * (number_of_digits - len(str(number))) +  str(number) for number in result]
-            return render(request, "index.html", {"seqLen": number1, "result": padded_result})
+            return render(request, "index.html", {"seqLen": number1, "result": padded_result, "num_digits": number_of_digits})
         else:
             return render(request, "index.html")
