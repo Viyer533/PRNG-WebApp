@@ -7,7 +7,7 @@ from prng_ecga import PRNS_GENERATOR
 
 class HomePage(View):
     def get(self, request, *args, **kwargs):
-        return render(request, "index.html")
+        return render(request, "index.html", {'result' : []})
 
     def post(self, request, *args, **kwargs):
         print("Hello")
@@ -26,8 +26,7 @@ class HomePage(View):
             number2 = int(request.POST.get("number2"))
 
             result = PRNS_GENERATOR.generate({"img": image_path, "n": number1, "m": number2})[:number1] 
-            print(result)
-
+            result = PRNS_GENERATOR.optimize(result)
             return render(request, "index.html", {"seqLen": number1, "mVal":2**number2 - 1, "result": result})
         else:
             return render(request, "index.html")

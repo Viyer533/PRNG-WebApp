@@ -202,7 +202,7 @@
             </div>
             <div id="imagePreview"></div>
             <input type="number" id = "sequenceLength" name="number1" placeholder="Enter sequence length" required><br>
-            <input type="number" id = "mValue" name=number2 placeholder="Enter m value" required><br>
+            <input type="number" id = "mValue" name=number2 min="8" placeholder="Enter m value (Min 8)" required><br>
             <button type="submit">GENERATE RANDOM SEQUENCE</button>
             <div id = "spinnerborder" class="spinner-border" role="status">
                 <span class = "sr-only">Generating...</span>
@@ -291,8 +291,8 @@
                 var sequenceLength = document.getElementById('sequenceLength').value;
                 var mValue = document.getElementById('mValue').value;
 
-                if (sequenceLength <= 0 || mValue <= 0) {
-                    alert('Please enter positive values for both sequence length and m value.');
+                if (sequenceLength <= 0 || mValue <= 7) {
+                    alert('Please enter acceptable values for both sequence length and m value.');
                     return false;
                 }
 
