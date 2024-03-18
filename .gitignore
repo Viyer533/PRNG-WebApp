@@ -1,7 +1,9 @@
 *.tiff
 *.png
+*.jpeg
+*.jpg
 __pycache__/
+/Project-Midsem/
 .venv/
 *.npy
 *.pyc
-Images/

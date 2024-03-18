@@ -28,6 +28,6 @@ class HomePage(View):
             result = PRNS_GENERATOR.generate({"img": image_path, "n": number1, "m": number2})[:number1] 
             print(result)
 
-            return render(request, "index.html", {"result": result})
+            return render(request, "index.html", {"seqLen": number1, "mVal":2**number2 - 1, "result": result})
         else:
             return render(request, "index.html")

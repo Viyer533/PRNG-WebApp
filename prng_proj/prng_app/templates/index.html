@@ -8,132 +8,211 @@
     <title>Image Upload and Number Input</title>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-        }
-        .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #fff;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            font-size: 1.2em;
-            display: block;
-        }
-        input[type="file"] {
-            font-size: 1.2em;
-            background-color: transparent;
-            border: 2px solid #fff;
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        input[type="number"] {
-            font-size: 1.2em;
-            background-color: transparent;
-            border: 2px solid #fff;
-            color: #000000;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            width: 200px;
-        }
-        button[type="submit"] {
-            font-size: 1.2em;
-            padding: 10px 20px;
-            background-color: transparent;
-            border: 2px solid cyan;
-            color: cyan;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 5px;
-        }
-        button[type="submit"]:hover {
-            background-color: cyan;
-            color: #fff;
-        }
-        #imagePreview {
-            margin-top: 20px;
-            max-width: 100%;
-            display: none;
-        }
-
-        body {
-            background: #ffe4c4;
-        }
-
-        /* pre {
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+    }
+    
+    .container {
         position: relative;
-        background: #d3d6db;
+        width: 80%;
+        /* max-width: 600px; */
+        padding: 20px;
+        text-align: center;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        
+    }
+    
+    h1 {
+        font-size: 2em;
+        color: #fff;
+        margin-bottom: 30px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        font-size: 1.2em;
+        display: block;
+        margin-bottom: 10px;
+        color: #fff;
+        
+    }
+    
+    input[type="number"]::placeholder {
+        color: #fff; /* Setting placeholder text color to white */
+    }
+
+    input[type="file"],
+    input[type="number"] {
+        font-size: 1em;
+        font-family: 'Montserrat', sans-serif;
+        background-color: rgba(255, 255, 255, 0.1);
+        border: none;
+        outline: none;
+        color: #fff;
         padding: 10px;
-        font-size: 15px;
-        word-wrap: break-word;
-        white-space: pre-wrap;
-        border: 1px solid #e6e7e9;
-        max-width: 500px;
-        } */
-
-        .copy-btn {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        /* .copy-button:hover {
+        border-radius: 5px;
+        width: calc(100% - 20px);
+        margin-bottom: 10px;
+        transition: background-color 0.3s ease;
+    }
+    
+    input[type="file"]::file-selector-button,
+    input[type="number"]:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    button[type="submit"] {
+        font-size: 1em;
+        padding: 10px 20px;
+        background-color: cyan;
+        border: none;
         color: #000;
-        } */
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        border-radius: 5px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    
+    button[type="submit"]:hover {
+        transform: scale(1.05);
+    }
+    
+    #imagePreview {
+        margin-top: 20px;
+        max-width: 100%;
+        display: none;
+    }
+    
+    .code-container {
+        margin-top: 30px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 30px;
+        backdrop-filter: blur(10px);
+        /* display: none; */
+    }
+    
+    pre {
+        white-space: nowrap;
+        overflow-x: auto;
+        background: transparent;
+        color: #fff;
+    }
+    
+    .copy-btn {
+        font-size: 0.9em;
+        font-family: 'Montserrat', sans-serif;
+        position: absolute;
+        top: 8px;
+        right: 5px;
+        padding: 5px 5px;
+        background-color: #fff;
+        color: #000;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        z-index: 1;
+    }
+    
+    .copy-btn:hover {
+        background-color: cyan;
+        color: #000;
+    }
+    .banner {
+    background-color: #007bff; 
+    color: #fff; 
+    padding: 20px;
+    border-radius: 5px; 
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+    }
 
-        pre {
-            white-space: nowrap;
-            overflow-x: auto;
-            position: relative;
-        }
+    .banner h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
 
-        .code-container {
-            margin-top : 50px;
-            position: relative;
-            background-color: #615a5a;
-            border: 1px solid #000000;
-            padding: 10px;
-        }
-    </style>
+    .banner p {
+        font-weight: bold; 
+        margin-bottom: 5px;
+    }
+
+    .banner ul {
+        list-style-type: none;
+        padding: 0; 
+    }
+
+    .banner li {
+        font-size: 1.1em;
+    }
+
+    .converting-buffer {
+        display: none;
+        color: white;
+        margin-top: 10px;
+    }
+
+    .spinner-border{
+        display:none;
+        color: #fff;
+        margin-left: 20px;
+    }
+    </style>    
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="{% static 'js/index.js' %}"></script>
 </head>
 <body>  
+    
+
     <div id="particles-js"></div> 
+    
     <div class="container">
         
-        <h1>Upload Image and Input Numbers</h1>
-        <form id="uploadForm" enctype="multipart/form-data" method="POST">
+        <div class="banner">
+            <h2>Pseudo Random Number Generator using Elliptic Curve Cryptography and Genetic Algorithm Optimization</h2>
+            <p>Implemented by:</p>
+            <ul>
+                <li>Aditya Harish (211IT005)</li>
+                <li>Ronith R Nair (211IT054)</li>
+                <li>Varun Bhaskaran Iyer (211IT078)</li>
+            </ul>
+        </div>
+        <h1>Upload Image and Sequence Parameters</h1>
+        <form id="uploadForm" enctype="multipart/form-data" method="POST" onsubmit = "return validateSubmit()">
             {% csrf_token %}
             <div class="form-group">
                 <label for="imageUpload"><b>Choose an image file:</b></label>
                 <input type="file" id="imageUpload" name="imageUpload" onchange="previewImage(event)">
             </div>
             <div id="imagePreview"></div>
-            <input type="number" name="number1" placeholder="Enter sequence length" required><br>
-            <input type="number" name="number2" placeholder="Enter m value" required><br>
-            <!-- <input type="number" name="number3" placeholder="Enter number 3" required><br>
-            <input type="number" name="number4" placeholder="Enter number 4" required><br> -->
-            <button type="submit">CONVERT</button>
+            <input type="number" id = "sequenceLength" name="number1" placeholder="Enter sequence length" required><br>
+            <input type="number" id = "mValue" name=number2 placeholder="Enter m value" required><br>
+            <button type="submit">GENERATE RANDOM SEQUENCE</button>
+            <div id = "spinnerborder" class="spinner-border" role="status">
+                <span class = "sr-only">Generating...</span>
+            </div>
+            
         </form>
-        <div class="code-container">
+        {% if result|length > 0 %}
+        <div class="code-container" id = "codeContainer">
+            <h3 style = "font-family: 'Montserrat', 'sans-serif';">Generated Sequence:</h2>
+            <h4  style = "font-family: 'Montserrat', 'sans-serif';">Sequence Length: {{seqLen}} <br> Range of each number: {{0}} - {{mVal}}</h4>
             <pre id="myPreTag">
                 {% for number in result %}
                     {{ number }}{% if not forloop.last %},{% endif %}
@@ -141,8 +220,10 @@
             </pre>    
             <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
         </div>
+        {% endif %}
         
         <script>
+
             function copyToClipboard() {
                 var seq = document.getElementById('myPreTag').innerText;
                 var buttonText = document.querySelector('.copy-btn');
@@ -179,6 +260,7 @@
                 document.body.removeChild(textarea);
                 }
             }
+
         </script>
     </div>
 
@@ -200,6 +282,33 @@
             reader.readAsDataURL(event.target.files[0]);
         }
 
+        function showConvertingBuffer() {
+            var spinner = document.getElementById('spinnerborder');
+            spinner.style.display = 'inline-block';
+        }
+
+        function validateForm() {
+                var sequenceLength = document.getElementById('sequenceLength').value;
+                var mValue = document.getElementById('mValue').value;
+
+                if (sequenceLength <= 0 || mValue <= 0) {
+                    alert('Please enter positive values for both sequence length and m value.');
+                    return false;
+                }
+
+                if (sequenceLength == '' || mValue == '') {
+                    alert('Please enter values for both sequence length and m value.');
+                    return false;
+                }
+
+                return true;
+            }
+        function validateSubmit(){
+            var isvalid = validateForm();
+            if (isvalid) {
+                showConvertingBuffer(); 
+            }
+        }
     </script>
 </body>
 </html>
