@@ -24,9 +24,9 @@ class HomePage(View):
 
             number1 = int(request.POST.get("number1"))
             number2 = int(request.POST.get("number2"))
-
+            
             result = PRNS_GENERATOR.generate({"img": image_path, "n": number1, "m": number2})[:number1] 
             result = PRNS_GENERATOR.optimize(result)
-            return render(request, "index.html", {"seqLen": number1, "mVal":2**number2 - 1, "result": result})
+            return render(request, "index.html", {"img": image_path, "seqLen": number1, "mVal":2**number2 - 1, "result": result})
         else:
             return render(request, "index.html")
