@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import View
 import os
+from math import log2, ceil
 from prng_ecga import PRNS_GENERATOR
 
 
@@ -24,9 +25,11 @@ class HomePage(View):
 
             number1 = int(request.POST.get("number1"))
             number2 = int(request.POST.get("number2"))
-
+            number_of_digits = number2
+            number2 = int(log2((10 ** number_of_digits)))
             result = PRNS_GENERATOR.generate({"img": image_path, "n": number1, "m": number2})[:number1] 
             result = PRNS_GENERATOR.optimize(result)
-            return render(request, "index.html", {"seqLen": number1, "mVal":2**number2 - 1, "result": result})
+            padded_result = ['0' * (number_of_digits - len(str(number))) +  str(number) for number in result]
+            return render(request, "index.html", {"seqLen": number1, "result": padded_result})
         else:
             return render(request, "index.html")
