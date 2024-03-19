@@ -23,14 +23,15 @@ body {
 .container {
     position: relative;
     width: 80%;
-    max-width: 50%;
+    max-width: 70%;
     padding: 40px;
     text-align: center;
     color: #ffffff;
     background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(200px);
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding-top: 10%;
 }
 
 h1 {
@@ -77,7 +78,7 @@ input[type="number"]:hover {
 button[type="submit"] {
     font-size: 1em;
     padding: 15px 30px;
-    background-color: #ff904e;
+    background-color: #ff7728;
     border: none;
     color: #fff;
     cursor: pointer;
@@ -118,7 +119,7 @@ pre {
     top: 20px;
     right: 20px;
     padding: 10px 15px;
-    background-color: #ff904e;
+    background-color: #ff7728;
     color: #fff;
     border-radius: 8px;
     cursor: pointer;
@@ -133,21 +134,23 @@ pre {
 .banner {
     background-color: #ffffff;
     color: #000000;
-    padding: 30px;
+    padding: 10px;
     border-radius: 10px;
     margin-bottom: 30px;
     font-family: 'Montserrat', sans-serif;
+    margin-top: 10px;
 }
 
 .banner h2 {
     font-size: 2em;
     margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .banner p {
     font-weight: bold;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 .banner ul {
@@ -171,6 +174,15 @@ pre {
     margin-left: 30px;
 }
 
+.nitk_logo {
+    max-width: 10%;
+    max-height: 10%;
+  }
+
+  .banner-text {
+    padding-top: 20px; 
+    max-height: 30%;
+}
     </style>    
     <!-- <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> -->
     <script src="{% static 'js/index.js' %}"></script>
@@ -178,18 +190,21 @@ pre {
 <body>  
     
 
-    <div id="particles-js"></div> 
+    <!-- <div id="particles-js"></div>  -->
     
     <div class="container">
         
         <div class="banner">
-            <h2>Pseudo Random Number Generator using Elliptic Curve Cryptography and Genetic Algorithm Optimization</h2>
-            <p>Implemented by:</p>
-            <ul>
-                <li>Aditya Harish (211IT005)</li>
-                <li>Ronith R Nair (211IT054)</li>
-                <li>Varun Bhaskaran Iyer (211IT078)</li>
-            </ul>
+            <div class = "banner-text">
+                <h2>Pseudo Random Number Generator using Elliptic Curve Cryptography and Genetic Algorithm Optimization</h2>
+                <img src = "https://upload.wikimedia.org/wikipedia/en/c/cc/NITK_Emblem.png" alt="NITK Logo" class = "nitk_logo">
+                <p>Implemented by:</p>
+                <ul>
+                    <li>Aditya Harish (211IT005)</li>
+                    <li>Ronith R Nair (211IT054)</li>
+                    <li>Varun Bhaskaran Iyer (211IT078)</li>
+                </ul>
+            </div>
         </div>
         <h1>Upload Image and Sequence Parameters</h1>
         <form id="uploadForm" enctype="multipart/form-data" method="POST" onsubmit = "return validateSubmit()">

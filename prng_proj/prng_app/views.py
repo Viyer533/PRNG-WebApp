@@ -18,7 +18,6 @@ class HomePage(View):
             image_file = request.FILES["imageUpload"]
             print(type(image_file))
             image_path = os.getcwd() + "/assets/" + image_file.name
-
             with open(image_path, "wb") as destination:
                 for chunk in image_file.chunks():
                     destination.write(chunk)
